@@ -37,22 +37,15 @@ include ROOT_PATH . '/views/includes/header.php';
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <?php
-            $count = 0;
-            $userModel = new User();
-            $categoryModel = new Category();
-            ?>
-
+            <?php  $count = 0;?>
             <?php foreach ($courses as $course): ?>
                 <?php
-                // Kiểm tra nếu đã hiển thị đủ 4 khóa học thì dừng
                 if ($count >= 4) {
                     break;
                 }
-                $instructorName = $userModel->getNameByID($course['instructor_id']);
-                $displayInstructor = $instructorName ?? 'Giảng viên';
-                $categoryName = $categoryModel->getNameByID($course['category_id']);
-                $displayCategory = $categoryName ?? 'N/A';
+
+                $displayCategory = htmlspecialchars($course['category_name'] ?? 'N/A');
+                $displayInstructor = htmlspecialchars($course['instructor_name'] ?? 'Giảng viên');
                 $detailUrl = "index.php?route=course_detail&id=" . htmlspecialchars($course['id']);
                 ?>
                 <a href="<?= $detailUrl ?>"
@@ -60,8 +53,7 @@ include ROOT_PATH . '/views/includes/header.php';
                     <div class="h-40 bg-purple-600 relative overflow-hidden"></div>
                     <div class="p-5">
                         <div class="flex items-center gap-2 mb-2">
-                            <span
-                                class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs"><?= htmlspecialchars($displayCategory) ?></span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs"><?= htmlspecialchars($displayCategory) ?></span>
                             <span
                                 class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs"><?= htmlspecialchars($course['level']) ?></span>
                         </div>
@@ -71,12 +63,13 @@ include ROOT_PATH . '/views/includes/header.php';
 
                         <p class="text-gray-600 mb-4 line-clamp-2"><?= htmlspecialchars($course['description']) ?></p>
                         <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                            <span class="text-gray-700"><?= htmlspecialchars($displayInstructor) ?></span>
+                            <span class="text-gray-700"><?= $displayInstructor ?></span>
                             <span class="text-blue-600 font-semibold"><?= htmlspecialchars($course['price']) ?></span>
                         </div>
                     </div>
                 </a>
                 <?php
+              
                 $count++;
                 ?>
             <?php endforeach; ?>

@@ -43,10 +43,10 @@ class BaseModel
         return $stmt->execute([$id]);
     }
 
-    // === INSERT AN TOÀN 100% (không sợ SQL Injection vào tên cột) ===
+    
     public function insert(array $data)
     {
-        // Chỉ cho phép các cột hợp lệ (tùy chọn: whitelist ở model con)
+        
         $columns = array_keys($data);
         $placeholders = [];
         $values = [];

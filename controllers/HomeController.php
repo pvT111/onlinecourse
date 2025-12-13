@@ -4,7 +4,10 @@ class HomeController
 {
     public function index()
     {
-        $courses = (new Course())->all();
+        $courseModel = new Course();   
+        $courses = $courseModel->Courses();
+
+    
         require_once ROOT_PATH . "/views/home/index.php";
     }
 }

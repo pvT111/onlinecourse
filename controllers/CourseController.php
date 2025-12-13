@@ -3,7 +3,10 @@ class CourseController
 {
     public function index()
     {
-        $courses = (new Course())->Categorys();
+        $courses = (new Course())->Courses();
+        $categoryModel = new Category();
+        $categorys = $categoryModel->all('name ASC');
+
         require ROOT_PATH . "/views/courses/index.php";
     }
 
@@ -18,13 +21,10 @@ class CourseController
     public function search()
     {
         $keyword = $_GET['q'] ?? '';
-        $pdo = (new Database())->connect();
-
-        $stmt = $pdo->prepare("SELECT * FROM courses WHERE title LIKE ?");
-        $stmt->execute(["%$keyword%"]);
-        $courses = $stmt->fetchAll();
-
+        $courseModel = new Course();
+        $courses = $courseModel->searchCourses($keyword); 
+        
         require ROOT_PATH . "/views/courses/search.php";
     }
-    
+
 }
