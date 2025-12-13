@@ -1,31 +1,63 @@
 <?php
-// views/instructor/lessons/create.php
-// expects $course_id
+$course = $course ?? [];
+require ROOT_PATH . '/views/includes/header.php';
 ?>
-<div class="max-w-3xl mx-auto">
-  <h2 class="text-2xl font-bold mb-4">Thêm bài học mới</h2>
-  <form action="<?= BASE_URL ?>/instructor/store_lesson" method="post" class="bg-white p-6 rounded-lg">
-    <input type="hidden" name="course_id" value="<?= htmlspecialchars($course_id) ?>">
-    <div>
-      <label>Tiêu đề *</label>
-      <input name="title" required class="w-full px-4 py-3 border rounded-lg" />
+
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <a href="index.php?route=instructor_lesson_manage&course_id=<?= $course['id'] ?? '' ?>"
+               class="text-blue-600 hover:underline">&larr; Quay lại quản lý bài học</a>
+            <h1 class="text-3xl font-bold text-gray-900 mt-4">
+                Thêm bài học mới — <span class="text-blue-600"><?= htmlspecialchars($course['title'] ?? '') ?></span>
+            </h1>
+        </div>
+
+        <form action="index.php?route=instructor_lesson_store" method="POST"
+              class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 space-y-8">
+
+            <input type="hidden" name="course_id" value="<?= $course['id'] ?? '' ?>">
+
+            <div>
+                <label class="block text-gray-700 mb-2 font-medium">Tiêu đề bài học *</label>
+                <input type="text" name="title" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Ví dụ: Giới thiệu về React" />
+            </div>
+
+            <div>
+                <label class="block text-gray-700 mb-2 font-medium">Nội dung bài học *</label>
+                <textarea name="content" rows="10" required
+                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="Nhập nội dung chi tiết..."></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-gray-700 mb-2 font-medium">URL Video (nếu có)</label>
+                    <input type="url" name="video_url"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                           placeholder="https://www.youtube.com/watch?v=..." />
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2 font-medium">Thứ tự hiển thị *</label>
+                    <input type="number" name="lesson_order" required min="1" value="<?= count($lessons ?? []) + 1 ?>"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <a href="index.php?route=instructor_lesson_manage&course_id=<?= $course['id'] ?? '' ?>"
+                   class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    Hủy
+                </a>
+                <button type="submit"
+                        class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">
+                    Lưu bài học
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="mt-4">
-      <label>Nội dung</label>
-      <textarea name="content" rows="6" class="w-full px-4 py-3 border rounded-lg"></textarea>
-    </div>
-    <div class="grid grid-cols-2 gap-4 mt-4">
-      <div>
-        <label>URL Video</label>
-        <input name="video_url" class="w-full px-4 py-3 border rounded-lg" />
-      </div>
-      <div>
-        <label>Thứ tự</label>
-        <input name="order" type="number" min="1" value="1" class="w-full px-4 py-3 border rounded-lg" />
-      </div>
-    </div>
-    <div class="mt-4 flex justify-end">
-      <button class="px-6 py-3 bg-blue-600 text-white rounded">Lưu bài học</button>
-    </div>
-  </form>
 </div>
+
+<?php require ROOT_PATH . '/views/includes/footer.php'; ?>

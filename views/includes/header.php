@@ -42,15 +42,16 @@ if (isset($_SESSION['user_id'])) {
 
         <!-- Right Section -->
         <div class="nav-right flex items-center gap-8 ">
-                <a href="index.php?route=courses"class ="text-gray-700 hover:text-purple-600 font-medium">Khóa học</button>
+                
             <?php if (!isset($user)): ?>
                 <!-- Chưa đăng nhập -->          
+                 <a href="index.php?route=courses"class ="text-gray-700 hover:text-purple-600 font-medium">Khóa học</button>
                 <a href="index.php?route=login" class="text-gray-700 hover:text-purple-600 font-medium">Đăng nhập</a>
                 <a href="index.php?route=register" class="bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700">Đăng ký</a>
 
             <?php else: ?>
                 <!-- Đã đăng nhập -->
-
+                
                 <div class="relative" id="user-menu-container">
                     <button
                         onclick="toggleUserMenu()"

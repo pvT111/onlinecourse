@@ -123,7 +123,99 @@ switch ($route) {
         requireRole(1);
         (new InstructorController())->dashboard();
         break;
+        // Tạo khóa học mới (hiển thị form)
+    case 'instructor_course_create':
+        requireLogin();
+        requireRole(1);
+        (new InstructorController())->courseCreate();
+        break;
 
+    // Lưu khóa học mới (POST)
+    case 'instructor_course_store':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->courseStore();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+
+    // Chỉnh sửa khóa học (hiển thị form + dữ liệu)
+    case 'instructor_course_edit':
+        requireLogin();
+        requireRole(1);
+        $id = $_GET['id'] ?? 0;
+        (new InstructorController())->courseEdit($id);
+        break;
+
+    // Cập nhật khóa học (POST)
+    case 'instructor_course_update':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->courseUpdate();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+
+    // Quản lý bài học của một khóa học
+    case 'instructor_lesson_manage':
+        requireLogin();
+        requireRole(1);
+        $course_id = $_GET['course_id'] ?? 0;
+        (new InstructorController())->lessonManage($course_id);
+        break;
+
+    // Thêm bài học mới (hiển thị form)
+    case 'instructor_lesson_create':
+        requireLogin();
+        requireRole(1);
+        $course_id = $_GET['course_id'] ?? 0;
+        (new InstructorController())->lessonCreate($course_id);
+        break;
+
+    // Lưu bài học mới (POST)
+    case 'instructor_lesson_store':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->lessonStore();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+
+    // Chỉnh sửa bài học
+    case 'instructor_lesson_edit':
+        requireLogin();
+        requireRole(1);
+        $id = $_GET['id'] ?? 0;
+        (new InstructorController())->lessonEdit($id);
+        break;
+
+    // Cập nhật bài học (POST)
+    case 'instructor_lesson_update':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->lessonUpdate();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+
+    // Xóa bài học (POST)
+    case 'instructor_lesson_delete':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->lessonDelete();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
     // --------------------------------------------------------
     // DEFAULT 404
     // --------------------------------------------------------

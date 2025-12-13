@@ -4,7 +4,7 @@ $hideCategories = true;
 include  ROOT_PATH   . '/views/includes/header.php';
 ?>
 
-<div class="bg-gradient-to-br from-blue-900 to-blue-700 text-white">
+<div class="bg-purple-600 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       
       <!-- Back Button -->
@@ -103,15 +103,15 @@ include  ROOT_PATH   . '/views/includes/header.php';
         <!-- Right Column - Enrollment Card -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-lg p-6 shadow-lg text-gray-900 sticky top-24 space-y-6">
-            <div class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity">
+            <div class="aspect-video bg-purple-600 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity">
               ▶️
             </div>
             <div>
               <div class="text-blue-600 text-lg font-semibold">499,000₫</div>
               <div class="text-gray-500 line-through">999,000₫</div>
             </div>
-            <button class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Mua ngay</button>
-            <button class="w-full py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">Giỏ hàng</button>
+            <button class="w-full py-3 bg-purple-600  text-white rounded-lg hover:bg-purple-700 transition-colors">Mua ngay</button>
+            <button class="w-full py-3 border border-purple-600 text-purpleblue-600 rounded-lg hover:bg-blue-50 transition-colors">Giỏ hàng</button>
             <div class="pt-6 border-t border-gray-200 space-y-2">
               <p class="text-gray-900 font-medium">Khóa học bao gồm:</p>
               <div class="flex items-center gap-3 text-gray-600">▶️ <span>12 video</span></div>
