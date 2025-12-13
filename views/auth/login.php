@@ -1,11 +1,11 @@
 <?php $pageTitle = "Đăng nhập - LearnHub"; ?>
 <?php include ROOT_PATH . '/views/includes/header.php'; ?>
 
-<div class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center px-4">
-    <div class="w-full max-w-96">/
+<div class="min-h-screen bg-white flex items-center justify-center px-4">
+    <div class="w-full max-w-96">
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-            <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-5 text-center">
-                <i class="fas fa-book-open text-4xl mb-4"></i>
+            <div class="bg-purple-600  text-white p-5 text-center">
+                <i class="fas fa-book-open text-4xl mb-4 "></i>
                 <h2 class="text-2xl font-bold">Đăng nhập</h2>
             </div>
 
@@ -31,7 +31,7 @@
                         <label class="block text-gray-700 font-medium mb-2">Mật khẩu</label>
                         <input type="password" name="password" required class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none" placeholder="••••••••">
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-lg hover:opacity-90 transition">
+                    <button type="submit" class="w-full bg-purple-600  text-white font-bold py-4 rounded-lg hover:opacity-90 transition">
                         Đăng nhập
                     </button>
                 </form>

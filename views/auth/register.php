@@ -3,12 +3,12 @@ $pageTitle = "Đăng ký tài khoản - LearnHub";
 include ROOT_PATH . '/views/includes/header.php'; 
 ?>
 
-<div class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center px-4 py-12">
+<div class="min-h-screen bg-white flex items-center justify-center px-4 py-12">
     <div class="w-full max-w-96">
         <!-- Card chính -->
         <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
             <!-- Header gradient -->
-            <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-6 text-center">
+            <div class="bg-purple-600 text-white px-5 py-6 text-center">
                 <i class="fas fa-user-plus text-4xl mb-4"></i>
                 <h2 class="text-2xl font-bold mb-2">Đăng ký</h2>
                
@@ -108,9 +108,9 @@ include ROOT_PATH . '/views/includes/header.php';
 
                     <!-- Nút đăng ký -->
                     <button type="submit"
-                        class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-lg transition transform hover:scale-105 shadow-lg">
+                        class="w-full bg-purple-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-lg transition transform hover:scale-105 shadow-lg">
                         <i class="fas fa-user-plus mr-2"></i>
-                        Đăng ký ngay
+                        Đăng ký 
                     </button>
 
                     <!-- Đã có tài khoản -->

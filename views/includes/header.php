@@ -29,7 +29,7 @@ if (isset($_SESSION['user_id'])) {
                 <i class="fas fa-bars"></i>
             </button>
             <a href="index.php" class="logo">
-                <i class="fas fa-book-open" style="color: var(--primary-color); font-size: 2rem;"></i>
+                <i class="fas fa-book-open text-purple-600 " style=" font-size: 2rem;"></i>
                 <span>LearnHub</span>
             </a>
         </div>
