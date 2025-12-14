@@ -92,17 +92,24 @@ switch ($route) {
     // STUDENT (ROLE = 0)
     // --------------------------------------------------------
     case 'enroll':
-        requireLogin();
-        requireRole(0); // student
-        $id = $_GET['id'] ?? 0;
-        (new EnrollmentController())->enroll($id);
-        break;
+    requireLogin();
+    requireRole(0); // student
+    $id = $_GET['id'] ?? 0;
+    (new EnrollmentController())->enroll($id);
+    break;
 
-    case 'student_dashboard':
-        requireLogin();
-        requireRole(0);
-        (new EnrollmentController())->dashboard();
-        break;
+case 'student_dashboard':
+    requireLogin();
+    requireRole(0);
+    (new EnrollmentController())->dashboard();
+    break;
+
+case 'student_course_process':
+    requireLogin();
+    requireRole(0); // chỉ student mới xem
+    $courseId = (int)($_GET['id'] ?? 0);
+    (new EnrollmentController())->courseProcess($courseId);
+    break;
 
     // --------------------------------------------------------
     // INSTRUCTOR (ROLE = 1)

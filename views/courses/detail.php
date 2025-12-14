@@ -20,7 +20,7 @@ include  ROOT_PATH   . '/views/includes/header.php';
           <!-- Category & Level -->
           <div class="flex items-center gap-2 mb-4">
             <span class="px-3 py-1 bg-blue-600 rounded-full">Lập trình</span>
-            <span class="px-3 py-1 bg-blue-600 rounded-full">Cơ bản</span>
+            <span class="px-3 py-1 bg-blue-600 rounded-full">Basic</span>
           </div>
 
           <!-- Title & Description -->
@@ -29,9 +29,8 @@ include  ROOT_PATH   . '/views/includes/header.php';
 
           <!-- Stats -->
           <div class="flex flex-wrap gap-6 mb-6">
-            <div class="flex items-center gap-2">★ <span>4.8 đánh giá</span></div>
             <div class="flex items-center gap-2">👥 <span>5,678 học viên</span></div>
-            <div class="flex items-center gap-2">⏰ <span>12 giờ</span></div>
+            <div class="flex items-center gap-2">⏰ <span>12 tuần </span></div>
             <div class="flex items-center gap-2">🌐 <span>Tiếng Việt</span></div>
           </div>
 
