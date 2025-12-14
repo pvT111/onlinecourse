@@ -111,7 +111,7 @@ switch ($route) {
     // --------------------------------------------------------
     case 'admin_dashboard':
         requireLogin();
-        requireRole(2);
+        
         (new AdminController())->dashboard();
         break;
 
@@ -202,6 +202,15 @@ switch ($route) {
         if ($method === 'POST') {
             (new InstructorController())->lessonUpdate();
         } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+    case 'instructor_course_delete':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+        (new InstructorController())->courseDelete();
+        }else {
             redirect('index.php?route=instructor_dashboard');
         }
         break;

@@ -9,16 +9,27 @@ class Course extends BaseModel
 
     public function getByInstructor($instructorId)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM courses WHERE instructor_id = ?");
-        $stmt->execute([$instructorId]);
-        return $stmt->fetchAll();
+        $sql = "
+        SELECT 
+            c.*, 
+            cat.name AS category_name
+        FROM courses c
+        LEFT JOIN categories cat ON c.category_id = cat.id
+        WHERE c.instructor_id = ?
+        ORDER BY c.id DESC
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$instructorId]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function Courses()
     {
         $select = "
         c.*, 
         cat.name AS category_name, 
-        u.fullname AS instructor_name  
+        u.fullname AS instructor_name
+        
     ";
 
         $sql = "
@@ -30,7 +41,7 @@ class Course extends BaseModel
             
         LEFT JOIN users u  
             ON c.instructor_id = u.id
-            
+       
         ORDER BY c.id DESC
     ";
 

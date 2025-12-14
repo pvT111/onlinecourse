@@ -23,4 +23,10 @@ class Enrollment extends BaseModel
         $stmt->execute([$userId, $courseId]);
         return $stmt->fetch() ? true : false;
     }
+    public function deleteByCourse($course_id)
+{
+    $stmt = $this->pdo->prepare("DELETE FROM enrollments WHERE course_id = ?");
+    $stmt->execute([$course_id]);
+    return $stmt->rowCount() > 0; 
+}
 }

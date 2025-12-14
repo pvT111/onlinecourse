@@ -46,7 +46,6 @@ include ROOT_PATH . '/views/includes/header.php';
             <label class="block text-gray-700 mb-3 font-medium">Trình độ</label>
             <div id="levelFilter" class="space-y-2">
               <?php
-              // BƯỚC 1: LỌC CÁC LEVEL DUY NHẤT TRƯỚC VÒNG LẶP
               $all_levels = array_column($courses, 'level');
               $unique_levels = array_unique($all_levels);
               ?>

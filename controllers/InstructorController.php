@@ -17,10 +17,9 @@ class InstructorController
     // ================================================
     public function dashboard()
     {
-        
+
         $courses = $this->courseModel->getByInstructor($_SESSION['user_id']);
 
-        // Tính thêm một số thông tin thống kê nếu cần (có thể mở rộng sau)
         require ROOT_PATH . "/views/instructor/dashboard.php";
     }
 
@@ -29,12 +28,11 @@ class InstructorController
     // ================================================
     public function courseCreate()
     {
+        $categoryModel = new Category();
+        $categorys = $categoryModel->all('name ASC');
         require ROOT_PATH . "/views/instructor/course/create.php";
     }
 
-    // ================================================
-    // LƯU KHÓA HỌC MỚI
-    // ================================================
     public function courseStore()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -45,11 +43,11 @@ class InstructorController
             'title' => trim($_POST['title'] ?? ''),
             'description' => trim($_POST['description'] ?? ''),
             'category_id' => (int) ($_POST['category_id'] ?? 0),
-            'level' => $_POST['level'] ?? 'Beginner',
+            'level' => $_POST['level'] ?? 'Basic',
             'price' => (int) ($_POST['price'] ?? 0),
-            'duration_weeks' => trim($_POST['duration_weeks'] ?? ''),  
-            'image' => 'default.jpg',                 
-      
+            'duration_weeks' => trim($_POST['duration_weeks'] ?? ''),
+            'image' => 'default.jpg',
+
         ];
 
         // Validate cơ bản
@@ -59,18 +57,18 @@ class InstructorController
         }
 
         // Xử lý upload thumbnail
-        if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = ROOT_PATH . '/uploads/courses/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
 
-            $fileName = time() . '_' . basename($_FILES['thumbnail']['name']);
+            $fileName = time() . '_' . basename($_FILES['image']['name']);
             $fileName = preg_replace('/[^a-zA-Z0-9._-]/', '', $fileName);
             $targetPath = $uploadDir . $fileName;
 
             $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-            if (in_array($_FILES['thumbnail']['type'], $allowedTypes) && move_uploaded_file($_FILES['thumbnail']['tmp_name'], $targetPath)) {
+            if (in_array($_FILES['image']['type'], $allowedTypes) && move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
                 $data['image'] = $fileName;
             } else {
                 $_SESSION['error'] = "Upload ảnh thất bại hoặc định dạng không hợp lệ.";
@@ -98,7 +96,8 @@ class InstructorController
             $_SESSION['error'] = "Không tìm thấy khóa học hoặc bạn không có quyền chỉnh sửa.";
             redirect('index.php?route=instructor_dashboard');
         }
-
+        $categoryModel = new Category();
+        $categorys = $categoryModel->all('name ASC');
         require ROOT_PATH . "/views/instructor/course/edit.php";
     }
 
@@ -216,6 +215,7 @@ class InstructorController
             'content' => $_POST['content'] ?? '',
             'video_url' => trim($_POST['video_url'] ?? ''),
             'order' => (int) ($_POST['order'] ?? 1),
+
         ];
 
         if (empty($data['title']) || empty($data['content'])) {
@@ -294,7 +294,49 @@ class InstructorController
 
         redirect('index.php?route=instructor_lesson_manage&course_id=' . $lesson['course_id']);
     }
+   // ================================================
+// XÓA KHÓA HỌC (với xóa cascade thủ công)
+// ================================================
+public function courseDelete()
+{
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        redirect('index.php?route=instructor_dashboard');
+    }
 
+    $id = $_POST['id'] ?? 0;
+    if ($id <= 0) {
+        $_SESSION['error'] = "ID khóa học không hợp lệ.";
+        redirect('index.php?route=instructor_dashboard');
+    }
+
+    $course = $this->courseModel->find($id);
+
+    if (!$course || $course['instructor_id'] != $_SESSION['user_id']) {
+        $_SESSION['error'] = "Không tìm thấy khóa học hoặc bạn không có quyền xóa.";
+        redirect('index.php?route=instructor_dashboard');
+    }
+    if ($course['image'] !== 'default.jpg') {
+        $imagePath = ROOT_PATH . '/uploads/courses/' . $course['image'];
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+    $lessons = $this->lessonModel->getByCourse($id);
+    foreach ($lessons as $lesson) {
+        $this->lessonModel->delete($lesson['id']);
+    }
+
+    $enrollmentModel = new Enrollment();
+    $enrollmentModel->deleteByCourse($id);
+
+    if ($this->courseModel->delete($id)) {
+        $_SESSION['success'] = "Xóa khóa học thành công! (bao gồm bài học và đăng ký)";
+    } else {
+        $_SESSION['error'] = "Có lỗi khi xóa khóa học.";
+    }
+
+    redirect('index.php?route=instructor_dashboard');
+}
     // ================================================
     // XÓA BÀI HỌC
     // ================================================
@@ -328,22 +370,17 @@ class InstructorController
         redirect('index.php?route=instructor_lesson_manage&course_id=' . $course_id);
     }
 
-    // Các method cũ bạn đã có (myCourses, students...) giữ nguyên dưới đây nếu cần
-    public function myCourses()
-    {
-        $courses = (new Course())->getByInstructor($_SESSION['user_id']);
-        require ROOT_PATH . "/views/instructor/my_courses.php";
-    }
+
 
     public function students($courseId = null)
     {
         $pdo = (new Database())->getInstance();
 
         if ($courseId) {
-            $sql = "SELECT u.*, e.enrolled_date, 
-                    FROM users u
-                    JOIN enrollments e ON e.user_id = u.id
-                    WHERE e.course_id = ?";
+            $sql = "SELECT u.*, e.enrolled_date
+        FROM users u
+        JOIN enrollments e ON e.user_id = u.id
+        WHERE e.course_id = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$courseId]);
             $students = $stmt->fetchAll();

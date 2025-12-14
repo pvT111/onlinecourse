@@ -46,7 +46,7 @@ class BaseModel
     
     public function insert(array $data)
     {
-        
+        $data['created_at'] = date('Y-m-d H:i:s');
         $columns = array_keys($data);
         $placeholders = [];
         $values = [];
@@ -69,6 +69,7 @@ class BaseModel
     // === UPDATE AN TOÀN ===
     public function update($id, array $data)
     {
+        $data['updated_at'] = date('Y-m-d H:i:s');
         $setParts = [];
         $values = [];
 
