@@ -10,6 +10,7 @@ class InstructorController
     {
         $this->courseModel = new Course();
         $this->lessonModel = new Lesson();
+        
     }
 
     // ================================================

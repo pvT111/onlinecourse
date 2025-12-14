@@ -1,10 +1,10 @@
 
 <?php
 // Ở file layout hoặc trước khi require header.php
-$user = null;
+$authuser = null;
 if (isset($_SESSION['user_id'])) {
     $userModel = new User();
-    $user = $userModel->find($_SESSION['user_id']);
+    $authuser = $userModel->find($_SESSION['user_id']);
 }
 ?>
 
@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Right Section -->
         <div class="nav-right flex items-center gap-8 ">
                 
-            <?php if (!isset($user)): ?>
+            <?php if (!isset($authuser)): ?>
                 <!-- Chưa đăng nhập -->          
                  <a href="index.php?route=courses"class ="text-gray-700 hover:text-purple-600 font-medium">Khóa học</button>
                 <a href="index.php?route=login" class="text-gray-700 hover:text-purple-600 font-medium">Đăng nhập</a>
@@ -58,18 +58,18 @@ if (isset($_SESSION['user_id'])) {
                         class="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 rounded-lg transition-colors"
                     >
                         <!-- Avatar -->
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 
+                        <div class="w-10 h-10 rounded-full bg-purple-600 
                             flex items-center justify-center text-white shadow-md">
-                            <?= strtoupper($user['fullname'][0]); ?>
+                            <?= strtoupper($authuser['fullname'][0]); ?>
                         </div>
 
                         <!-- User Info -->
                         <div class="text-left hidden lg:block">
-                            <div class="text-gray-900"><?= $user['fullname']; ?></div>
+                            <div class="text-gray-900"><?= $authuser['fullname']; ?></div>
                             <div class="text-xs text-gray-500">
                                 <?= 
-                                    $user['role'] === 2 ? "Quản trị viên" : 
-                                    ($user['role'] === 1 ? "Giảng viên" : "Học viên")
+                                    $authuser['role'] === 2 ? "Quản trị viên" : 
+                                    ($authuser['role'] === 1 ? "Giảng viên" : "Học viên")
                                 ?>
                             </div>
                         </div>
@@ -84,19 +84,19 @@ if (isset($_SESSION['user_id'])) {
 
                         <!-- Info -->
                         <div class="px-4 py-3 border-b border-gray-200">
-                            <div class="text-gray-900"><?= $user['fullname']; ?></div>
-                            <div class="text-sm text-gray-500"><?= $user['email']; ?></div>
+                            <div class="text-gray-900"><?= $authuser['fullname']; ?></div>
+                            <div class="text-sm text-gray-500"><?= $authuser['email']; ?></div>
 
                             <div class="mt-1">
                                 <span class="
                                     inline-block px-2 py-1 rounded-full text-xs
-                                    <?= $user['role'] === 2 ? 'bg-purple-100 text-purple-700' : '' ?>
-                                    <?= $user['role'] === 1 ? 'bg-blue-100 text-blue-700' : '' ?>
-                                    <?= $user['role'] === 0 ? 'bg-green-100 text-green-700' : '' ?>
+                                    <?= $authuser['role'] === 2 ? 'bg-purple-100 text-purple-700' : '' ?>
+                                    <?= $authuser['role'] === 1 ? 'bg-blue-100 text-blue-700' : '' ?>
+                                    <?= $authuser['role'] === 0 ? 'bg-green-100 text-green-700' : '' ?>
                                 ">
                                     <?= 
-                                        $user['role'] === 2 ? "Quản trị viên" : 
-                                        ($user['role'] === 1 ? "Giảng viên" : "Học viên")
+                                        $authuser['role'] === 2 ? "Quản trị viên" : 
+                                        ($authuser['role'] === 1 ? "Giảng viên" : "Học viên")
                                     ?>
                                 </span>
                             </div>
@@ -105,8 +105,8 @@ if (isset($_SESSION['user_id'])) {
                         <!-- Menu Items -->
                         <div class="py-2">
                             <a href="<?= 
-                                        $user['role'] === 2 ? "index.php?route=admin_dashboard" : 
-                                        ($user['role'] === 1 ? "index.php?route=instructor_dashboard" : "index.php?route=student_dashboard")
+                                        $authuser['role'] === 2 ? "index.php?route=admin_dashboard" : 
+                                        ($authuser['role'] === 1 ? "index.php?route=instructor_dashboard" : "index.php?route=student_dashboard")
                                     ?>" 
                             class="w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors flex items-center gap-3 text-gray-700">
                                 <i class="fa-solid fa-table-columns w-5 h-5"></i>

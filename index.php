@@ -1,10 +1,12 @@
+
 <?php
 session_start();
 
 define('ROOT_PATH', __DIR__);
-define('BASE_URL', '/onlinecourse/');  // ĐƯỜNG DẪN TỪ GỐC WEB
+define('BASE_URL', '/onlinecourse/'); 
 
-function redirect($url) {
+function redirect($url)
+{
     header("Location: " . BASE_URL . $url);
     exit();
 }
@@ -28,59 +30,40 @@ require_once __DIR__ . '/controllers/EnrollmentController.php';
 require_once __DIR__ . '/controllers/AdminController.php';
 require_once __DIR__ . '/controllers/InstructorController.php';
 
-
 $route = $_GET['route'] ?? 'home';
 $method = $_SERVER['REQUEST_METHOD'];
 
 // ------------------------------------------------------------
 // AUTH HELPERS
 // ------------------------------------------------------------
-function requireLogin() {
-    if (!isset($_SESSION['user_id'])) {
-        redirect('index.php?route=login');   // dùng hàm redirect mới
-        exit();
-    }
-}
-
-function requireRole($requiredRole) {
+function requireLogin()
+{
     if (!isset($_SESSION['user_id'])) {
         redirect('index.php?route=login');
         exit();
     }
-    if ($_SESSION['role'] != $requiredRole) {  
+}
+
+function requireRole($requiredRole)
+{
+    requireLogin();
+    if ($_SESSION['role'] != $requiredRole) {
         http_response_code(403);
         echo "Forbidden: Bạn không có quyền truy cập.";
         exit();
     }
 }
 
+// ------------------------------------------------------------
+// ROUTING
+// ------------------------------------------------------------
 switch ($route) {
 
-    // --------------------------------------------------------
-    // HOME
-    // --------------------------------------------------------
+    
     case 'home':
         (new HomeController())->index();
         break;
 
-    // --------------------------------------------------------
-    // AUTH
-    // --------------------------------------------------------
-    case 'login':
-        $auth = new AuthController();
-        ($method == 'POST') ? $auth->processLogin() : $auth->login();
-        break;
-
-    case 'logout':
-        (new AuthController())->logout();
-        break;
-    case 'register':
-        $auth = new AuthController();
-        ($method == 'POST') ? $auth->processRegister() : $auth->register();
-        break;
-    // --------------------------------------------------------
-    // COURSES (PUBLIC)
-    // --------------------------------------------------------
     case 'courses':
         (new CourseController())->index();
         break;
@@ -90,8 +73,23 @@ switch ($route) {
         (new CourseController())->detail($id);
         break;
 
+
+    case 'login':
+        $auth = new AuthController();
+        $method === 'POST' ? $auth->processLogin() : $auth->login();
+        break;
+
+    case 'register':
+        $auth = new AuthController();
+        $method === 'POST' ? $auth->processRegister() : $auth->register();
+        break;
+
+    case 'logout':
+        (new AuthController())->logout();
+        break;
+
     // --------------------------------------------------------
-    // ENROLLMENTS (STUDENT ONLY)
+    // STUDENT (ROLE = 0)
     // --------------------------------------------------------
     case 'enroll':
         requireLogin();
@@ -107,30 +105,20 @@ switch ($route) {
         break;
 
     // --------------------------------------------------------
-    // ADMIN (ROLE = 2)
-    // --------------------------------------------------------
-    case 'admin_dashboard':
-        requireLogin();
-        
-        (new AdminController())->dashboard();
-        break;
-
-    // --------------------------------------------------------
-    // INSTRUCTOR DASHBOARD (ROLE = 1)
+    // INSTRUCTOR (ROLE = 1)
     // --------------------------------------------------------
     case 'instructor_dashboard':
         requireLogin();
         requireRole(1);
         (new InstructorController())->dashboard();
         break;
-        // Tạo khóa học mới (hiển thị form)
+
     case 'instructor_course_create':
         requireLogin();
         requireRole(1);
         (new InstructorController())->courseCreate();
         break;
 
-    // Lưu khóa học mới (POST)
     case 'instructor_course_store':
         requireLogin();
         requireRole(1);
@@ -141,7 +129,6 @@ switch ($route) {
         }
         break;
 
-    // Chỉnh sửa khóa học (hiển thị form + dữ liệu)
     case 'instructor_course_edit':
         requireLogin();
         requireRole(1);
@@ -149,7 +136,6 @@ switch ($route) {
         (new InstructorController())->courseEdit($id);
         break;
 
-    // Cập nhật khóa học (POST)
     case 'instructor_course_update':
         requireLogin();
         requireRole(1);
@@ -160,7 +146,16 @@ switch ($route) {
         }
         break;
 
-    // Quản lý bài học của một khóa học
+    case 'instructor_course_delete':
+        requireLogin();
+        requireRole(1);
+        if ($method === 'POST') {
+            (new InstructorController())->courseDelete();
+        } else {
+            redirect('index.php?route=instructor_dashboard');
+        }
+        break;
+
     case 'instructor_lesson_manage':
         requireLogin();
         requireRole(1);
@@ -168,7 +163,6 @@ switch ($route) {
         (new InstructorController())->lessonManage($course_id);
         break;
 
-    // Thêm bài học mới (hiển thị form)
     case 'instructor_lesson_create':
         requireLogin();
         requireRole(1);
@@ -176,7 +170,6 @@ switch ($route) {
         (new InstructorController())->lessonCreate($course_id);
         break;
 
-    // Lưu bài học mới (POST)
     case 'instructor_lesson_store':
         requireLogin();
         requireRole(1);
@@ -187,17 +180,13 @@ switch ($route) {
         }
         break;
 
-    // Chỉnh sửa bài học
     case 'instructor_lesson_edit':
-        requireLogin();
         requireRole(1);
         $id = $_GET['id'] ?? 0;
         (new InstructorController())->lessonEdit($id);
         break;
 
-    // Cập nhật bài học (POST)
     case 'instructor_lesson_update':
-        requireLogin();
         requireRole(1);
         if ($method === 'POST') {
             (new InstructorController())->lessonUpdate();
@@ -205,17 +194,7 @@ switch ($route) {
             redirect('index.php?route=instructor_dashboard');
         }
         break;
-    case 'instructor_course_delete':
-        requireLogin();
-        requireRole(1);
-        if ($method === 'POST') {
-        (new InstructorController())->courseDelete();
-        }else {
-            redirect('index.php?route=instructor_dashboard');
-        }
-        break;
 
-    // Xóa bài học (POST)
     case 'instructor_lesson_delete':
         requireLogin();
         requireRole(1);
@@ -225,11 +204,105 @@ switch ($route) {
             redirect('index.php?route=instructor_dashboard');
         }
         break;
+
     // --------------------------------------------------------
-    // DEFAULT 404
+    // ADMIN (ROLE = 2)
     // --------------------------------------------------------
+    case 'admin_dashboard':
+        requireLogin();
+        requireRole(2);
+        (new AdminController())->dashboard();
+        break;
+
+    // Quản lý danh mục
+    case 'admin_category_create':
+        requireLogin();
+        requireRole(2);
+        (new AdminController())->categoryCreate();
+        break;
+
+    case 'admin_category_store':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->categoryStore();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+
+    case 'admin_category_edit':
+        requireLogin();
+        requireRole(2);
+        $id = $_GET['id'] ?? 0;
+        (new AdminController())->categoryEdit($id);
+        break;
+
+    case 'admin_category_update':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->categoryUpdate();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+
+    case 'admin_category_delete':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->categoryDelete();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+
+    case 'admin_user_create':
+        requireLogin();
+        requireRole(2);
+        (new AdminController())->userCreate();
+        break;
+
+    case 'admin_user_store':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->userStore();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+
+    case 'admin_user_edit':
+        requireLogin();
+        requireRole(2);
+        $id = $_GET['id'] ?? 0; 
+        (new AdminController())->userEdit($id);
+        break;
+
+    case 'admin_user_update':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->userUpdate();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+
+    case 'admin_user_delete':
+        requireLogin();
+        requireRole(2);
+        if ($method === 'POST') {
+            (new AdminController())->userDelete();
+        } else {
+            redirect('index.php?route=admin_dashboard');
+        }
+        break;
+        
     default:
         http_response_code(404);
-        echo "404 - Page not found";
+        echo "404 - Page Not Found";
         break;
 }

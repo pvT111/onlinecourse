@@ -11,14 +11,5 @@ class User extends BaseModel
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function getNameByID($ID){
-        $sql = "SELECT fullname FROM {$this->table} WHERE id = ?";       
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$ID]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            return $result['fullname'];
-        }
-        return null;
-    }
+    
 }
