@@ -1,0 +1,158 @@
+Tạo website demo OnlineCourse – nền tảng khóa học trực tuyến, sử dụng HTML5 + CSS3 + JavaScript thuần, không sử dụng framework, backend hoặc API.
+
+Các trang
+
+index.html — Trang chủ
+
+courses.html — Danh sách khóa học
+
+course-detail.html — Chi tiết khóa học
+
+blog.html — Blog kiến thức
+
+article.html — Chi tiết bài viết
+
+faq.html — Câu hỏi thường gặp
+
+about.html — Giới thiệu
+
+Chức năng chính
+
+Giao diện tương thích máy tính, máy tính bảng và điện thoại.
+
+Thanh điều hướng cố định khi cuộn trang.
+
+Menu điều hướng dạng hamburger trên điện thoại.
+
+Khu vực giới thiệu nổi bật với nút kêu gọi hành động.
+
+Hiển thị danh sách khóa học dạng thẻ.
+
+Tìm kiếm khóa học.
+
+Lọc khóa học theo danh mục và trình độ.
+
+Trang chi tiết khóa học gồm:
+
+Mô tả khóa học.
+
+Mục tiêu học tập.
+
+Nội dung chương trình.
+
+Thông tin khóa học.
+
+Thông tin giảng viên.
+
+Đối tượng phù hợp.
+
+Câu hỏi thường gặp.
+
+Nội dung chương trình học sử dụng dạng mở rộng/thu gọn.
+
+Trang Blog hiển thị các bài viết kiến thức.
+
+Trang bài viết có tiêu đề, tác giả, ngày đăng, ngày cập nhật, nội dung và nguồn tham khảo.
+
+Trang FAQ sử dụng dạng câu hỏi và câu trả lời mở rộng/thu gọn.
+
+Nút "Đăng ký khóa học" chỉ là chức năng minh họa, không cần thanh toán thật.
+
+Sử dụng dữ liệu mẫu, không cần cơ sở dữ liệu.
+
+Các khóa học mẫu
+
+Lập trình Web
+
+Digital Marketing
+
+Python và Phân tích dữ liệu
+
+Thiết kế UI/UX
+
+Trí tuệ nhân tạo và Machine Learning
+
+Tối ưu GEO và SEO
+
+Cấu trúc nội dung rõ ràng để người dùng và công cụ tìm kiếm AI dễ hiểu và trích xuất:
+
+Sử dụng Semantic HTML5.
+
+Mỗi trang có một tiêu đề H1 rõ ràng.
+
+Phân cấp H1, H2, H3 hợp lý.
+
+Sử dụng đoạn văn ngắn, danh sách và bảng khi phù hợp.
+
+Có thẻ Meta Title và Meta Description.
+
+Có liên kết giữa các trang trong website.
+
+Hình ảnh có thuộc tính alt.
+
+Câu hỏi và câu trả lời được trình bày rõ ràng.
+
+Bài viết có thông tin tác giả và ngày cập nhật.
+
+Có mục nguồn tham khảo.
+
+Thêm JSON-LD Schema phù hợp gồm:
+
+Organization
+
+WebSite
+
+Course
+
+Person
+
+Article
+
+FAQPage
+
+BreadcrumbList
+
+Schema phải khớp với nội dung thực tế trên trang.
+
+Giao diện
+
+Thiết kế theo phong cách nền tảng giáo dục trực tuyến hiện đại:
+
+Tối giản, chuyên nghiệp và cao cấp.
+
+Màu chủ đạo xanh Indigo/Blue kết hợp Cyan.
+
+Nền sáng, nhiều khoảng trắng.
+
+Chữ hiện đại, dễ đọc.
+
+Thẻ nội dung bo góc 12–16px.
+
+Đổ bóng nhẹ.
+
+Hiệu ứng hover và focus rõ ràng.
+
+Chuyển động nhẹ, không lạm dụng.
+
+Ưu tiên thiết kế trên điện thoại trước.
+
+Cấu trúc mã nguồn
+online-course/
+├── index.html
+├── courses.html
+├── course-detail.html
+├── blog.html
+├── article.html
+├── faq.html
+├── about.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+└── assets/
+    └── images/
+
+
+Mã nguồn phải sạch, dễ đọc, dễ chỉnh sửa và chạy trực tiếp trên trình duyệt, không cần công cụ build.
+
+Ưu tiên: Giao diện hiện đại → Responsive → Nội dung có cấu trúc → SEO → GEO/AI Search → Hiệu năng.

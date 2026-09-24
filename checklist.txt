@@ -1,0 +1,5 @@
+1. Nghiên cứu và xác định bộ từ khóa mục tiêu cùng các câu hỏi thường gặp (FAQs) mà người dùng hay hỏi AI về chủ đề của website.
+2. Xây dựng nội dung chất lượng cao, cung cấp thông tin chính xác, có dẫn chứng nguồn uy tín và trình bày theo dạng cấu trúc rõ ràng (Sử dụng Bullet points, Table).
+3. Triển khai cài đặt Schema Markup (Dữ liệu cấu trúc) để giúp AI dễ dàng hiểu thực thể (Entity) và mối quan hệ giữa các nội dung trên trang.
+4. Tối ưu hóa tốc độ tải trang và giao diện tương thích đa thiết bị để đảm bảo trải nghiệm người dùng đạt chuẩn.
+5. Kiểm tra khả năng hiển thị của website trên các công cụ AI Search và điều chỉnh nội dung dựa trên kết quả phản hồi.

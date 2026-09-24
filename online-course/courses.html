@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa Học Lập Trình Web, AI, Marketing Trực Tuyến - OnlineCourse</title>
+    <meta name="description" content="Khám phá các khóa học hàng đầu về Lập trình Web, Digital Marketing, Python & Dữ liệu, UI/UX Design, AI & Machine Learning và Tối ưu GEO/SEO.">
+    <link rel="canonical" href="https://example.com/courses.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Schema: BreadcrumbList & ItemList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Trang Chủ",
+              "item": "https://example.com/index.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Danh Sách Khóa Học",
+              "item": "https://example.com/courses.html"
+            }
+          ]
+        },
+        {
+          "@type": "ItemList",
+          "name": "Danh Sách Khóa Học OnlineCourse",
+          "description": "Tuyển tập các khóa học kỹ năng số thực chiến",
+          "itemListElement": [
+            {
+              "@type": "Course",
+              "position": 1,
+              "name": "Lập trình Web Frontend & Backend",
+              "url": "https://example.com/course-detail.html",
+              "description": "Nắm vững HTML5, CSS3, JavaScript thuần và xây dựng ứng dụng web hoàn chỉnh."
+            },
+            {
+              "@type": "Course",
+              "position": 2,
+              "name": "Digital Marketing Thực Chiến",
+              "url": "https://example.com/course-detail.html",
+              "description": "Chiến lược Social Media, Google Ads, SEO và tối ưu hóa chuyển đổi."
+            },
+            {
+              "@type": "Course",
+              "position": 3,
+              "name": "Python và Phân tích dữ liệu",
+              "url": "https://example.com/course-detail.html",
+              "description": "Xử lý, trực quan hóa và phân tích dữ liệu chuyên sâu với Python."
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .courses-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 7rem 0 3.5rem;
+            text-align: center;
+        }
+        
+        .courses-header h1 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .courses-header p {
+            color: rgba(255,255,255,0.85);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background-color: var(--surface-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin: -2rem auto 2.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 260px;
+            flex-grow: 1;
+            max-width: 380px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo" aria-label="OnlineCourse Trang chủ">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z" fill="currentColor"/>
+                </svg>
+                Online<span>Course</span>
+            </a>
+            <button class="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false">&#9776;</button>
+            <nav aria-label="Menu chính">
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="courses.html" class="active">Khóa Học</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Title & Header -->
+        <section class="courses-header">
+            <div class="container">
+                <nav class="breadcrumbs" aria-label="Đường dẫn trang" style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; justify-content: center; display: flex;">
+                    <ol>
+                        <li><a href="index.html" style="color: white;">Trang Chủ</a></li>
+                        <li aria-current="page" style="color: rgba(255,255,255,0.9);">Danh Sách Khóa Học</li>
+                    </ol>
+                </nav>
+                <h1>Danh Sách Khóa Học Trực Tuyến</h1>
+                <p>Khám phá lộ trình đào tạo từ cơ bản đến nâng cao, được biên soạn bởi các chuyên gia thực chiến hàng đầu.</p>
+            </div>
+        </section>
+
+        <section class="container pb-5">
+            <!-- Filter & Search Controls -->
+            <div class="filter-bar">
+                <div class="filter-buttons" role="group" aria-label="Lọc khóa học theo danh mục">
+                    <button class="filter-btn active" data-filter="all">Tất cả (6)</button>
+                    <button class="filter-btn" data-filter="dev">Lập trình Web</button>
+                    <button class="filter-btn" data-filter="marketing">Digital Marketing</button>
+                    <button class="filter-btn" data-filter="data">Phân tích Dữ liệu</button>
+                    <button class="filter-btn" data-filter="design">Thiết kế UI/UX</button>
+                    <button class="filter-btn" data-filter="ai">Trí tuệ Nhân tạo</button>
+                    <button class="filter-btn" data-filter="seo">GEO & SEO</button>
+                </div>
+                <div class="search-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="courseSearch" placeholder="Tìm kiếm theo tên khóa học hoặc kỹ năng..." aria-label="Tìm kiếm khóa học">
+                </div>
+            </div>
+
+            <!-- Course Grid -->
+            <div class="grid" id="courseGrid">
+                <!-- Course 1 -->
+                <article class="card course-card" data-category="dev">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Lập trình Web Frontend & Backend">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Mọi cấp độ • 40 giờ</span>
+                            <span>⭐ 4.8 (1,234)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Lập trình Web Frontend & Backend</a></h2>
+                        <p class="card-text">Nắm vững HTML5 Semantic, CSS3 Responsive và JavaScript thuần. Xây dựng nền tảng vững chắc trước khi tiếp cận Frameworks.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course 2 -->
+                <article class="card course-card" data-category="marketing">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Digital Marketing Thực Chiến">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Căn bản • 35 giờ</span>
+                            <span>⭐ 4.9 (856)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Digital Marketing Thực Chiến</a></h2>
+                        <p class="card-text">Xây dựng chiến dịch Facebook Ads, Google Ads, Content Marketing và tối ưu hóa tỷ lệ chuyển đổi (CRO) cho doanh nghiệp.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course 3 -->
+                <article class="card course-card" data-category="data">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Python và Phân tích dữ liệu">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Trung cấp • 45 giờ</span>
+                            <span>⭐ 4.7 (720)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Python và Phân tích dữ liệu</a></h2>
+                        <p class="card-text">Khai thác và trực quan hóa tập dữ liệu lớn với thư viện Pandas, NumPy, Matplotlib và giải quyết bài toán kinh doanh thực tế.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course 4 -->
+                <article class="card course-card" data-category="design">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Thiết kế UI/UX Chuyên Nghiệp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Mọi cấp độ • 30 giờ</span>
+                            <span>⭐ 4.9 (610)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Thiết kế UI/UX Chuyên Nghiệp</a></h2>
+                        <p class="card-text">Nghiên cứu hành vi người dùng (User Research), thiết kế Wireframe, Design System và Prototype tương tác cao trên Figma.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course 5 -->
+                <article class="card course-card" data-category="ai">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Trí tuệ nhân tạo và Machine Learning">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Nâng cao • 50 giờ</span>
+                            <span>⭐ 4.8 (490)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Trí tuệ nhân tạo và Machine Learning</a></h2>
+                        <p class="card-text">Làm chủ các thuật toán Supervised/Unsupervised Learning, xây dựng Neural Networks với TensorFlow và khai phá Generative AI.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Course 6 -->
+                <article class="card course-card" data-category="seo">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&q=80" loading="lazy" width="600" height="338" alt="Khóa học Tối ưu GEO và SEO">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span>Trung cấp • 25 giờ</span>
+                            <span>⭐ 4.6 (380)</span>
+                        </div>
+                        <h2 class="card-title"><a href="course-detail.html">Tối ưu GEO và SEO</a></h2>
+                        <p class="card-text">Chiến lược tối ưu hóa công cụ tìm kiếm truyền thống kết hợp Generative Engine Optimization (GEO) đón đầu các thuật toán AI Search.</p>
+                        <div class="card-footer">
+                            <span class="price">Miễn phí</span>
+                            <a href="course-detail.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Chi tiết</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Structured Course Summary Table (Task 2: Tables for AI Extraction) -->
+            <div style="margin-top: 4rem;">
+                <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Bảng Tổng Hợp Thông Tin Các Khóa Học 2026</h3>
+                <p>Bảng tóm tắt thông số kỹ thuật, thời lượng và điều kiện tiên quyết giúp học viên và công cụ tìm kiếm dễ dàng so sánh:</p>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tên khóa học</th>
+                                <th>Danh mục</th>
+                                <th>Trình độ</th>
+                                <th>Thời lượng</th>
+                                <th>Yêu cầu đầu vào</th>
+                                <th>Chứng nhận</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lập trình Web Frontend & Backend</strong></td>
+                                <td>Lập trình Web</td>
+                                <td>Căn bản / Mọi cấp độ</td>
+                                <td>40 giờ</td>
+                                <td>Không yêu cầu kiến thức trước</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Digital Marketing Thực Chiến</strong></td>
+                                <td>Marketing</td>
+                                <td>Căn bản</td>
+                                <td>35 giờ</td>
+                                <td>Kỹ năng tin học văn phòng</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Python và Phân tích dữ liệu</strong></td>
+                                <td>Khoa học dữ liệu</td>
+                                <td>Trung cấp</td>
+                                <td>45 giờ</td>
+                                <td>Tư duy logic cơ bản</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thiết kế UI/UX Chuyên Nghiệp</strong></td>
+                                <td>Thiết kế đồ họa</td>
+                                <td>Mọi cấp độ</td>
+                                <td>30 giờ</td>
+                                <td>Không yêu cầu</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trí tuệ nhân tạo và Machine Learning</strong></td>
+                                <td>Trí tuệ nhân tạo</td>
+                                <td>Nâng cao</td>
+                                <td>50 giờ</td>
+                                <td>Biết Python cơ bản & Toán giải tích</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tối ưu GEO và SEO</strong></td>
+                                <td>Marketing / Kỹ thuật</td>
+                                <td>Trung cấp</td>
+                                <td>25 giờ</td>
+                                <td>Hiểu biết cơ bản về website</td>
+                                <td><span class="badge-success">Có chứng chỉ</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="logo" style="color: white; margin-bottom: 1rem;">Online<span style="color: var(--secondary);">Course</span></a>
+                    <p>Nền tảng giáo dục trực tuyến chất lượng cao.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 OnlineCourse. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

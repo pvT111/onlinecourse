@@ -1,0 +1,11 @@
+Nhóm	        Từ khóa / câu hỏi	                                        Search intent	                    Trang trả lời
+Từ khóa chính	học trực tuyến online course	                            Informational / Navigational	        Trang chủ (index.html)
+Từ khóa chính	khóa học lập trình web trực tuyến	                        Commercial / Informational	            Danh sách khóa học (courses.html)
+Từ khóa phụ	    lộ trình tự học lập trình frontend backend	                Informational	                        Chi tiết khóa học (course-detail.html)
+Từ khóa phụ	    xu hướng học AI và phân tích dữ liệu 2026	                Informational	                        Blog (blog.html)
+FAQ	            Học trực tuyến có được cấp chứng chỉ không?	Q&A	                                                    FAQ (faq.html)
+FAQ	            Người mới bắt đầu nên học khóa học nào trước?	Q&A	                                                FAQ (faq.html)
+So sánh	        Học trực tuyến vs Học tại trung tâm: Lựa chọn nào tối ưu?	Commercial Investigation	            Bài viết blog (article.html)
+So sánh	        HTML/CSS/JS thuần vs Frameworks (React, Vue)	                Informational / Commercial	            Bài viết blog (article.html)
+Hướng dẫn	    Cách tự học lập trình web từ con số 0 cho người mới	            Informational	                            Blog (article.html)
+Hướng dẫn	    Cách tối ưu website cho AI Search và GEO (Generative Engine)	Informational	Blog (article.html)
